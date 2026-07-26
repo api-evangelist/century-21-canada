@@ -1,0 +1,277 @@
+aid: century-21-canada
+name: Century 21 Canada
+review:
+  question: >-
+    Does Century 21 Canada publish a public, developer-reachable API — and what is its RESO posture
+    and access gate?
+  answer: false
+  date: '2026-07-26'
+  reviewer: API Evangelist
+  homeMarket: Canada
+  tier: brokerage
+  openapiHarvested: false
+  specsCount: 0
+sector:
+  resoPosture: >-
+    No RESO reference found. Century 21 Canada shows no RESO Web API certification, no RESO Data
+    Dictionary certification (no version claim of any kind), no listing in any RESO certification
+    directory that could be confirmed, no OData service root, no $metadata document, and no
+    Universal Property Identifier (UPI) usage. The strings "RESO", "OData", "$metadata", "UPI" and
+    "DDF" were searched for in the fetched HTML of https://www.c21.ca/ , https://www.c21.ca/search/
+    and a live listing detail page — zero genuine hits (the only "ddf" substrings were inside a
+    Brytecore UUID and an emoji-polyfill script, not data-standard references). This is the expected
+    and honest Canadian answer: RESO certification is a US MLS-layer artifact, and Canadian listing
+    distribution runs instead through CREA's national Data Distribution Facility (DDF®), which CREA
+    describes as normalized to the RESO Data Dictionary. A brokerage franchisor like Century 21
+    Canada is a DOWNSTREAM consumer of that pool, not a certified data provider, so there is nothing
+    for it to certify.
+  resoCertified: false
+  resoDirectoryEvidence: >-
+    https://certification.reso.org/ was probed directly on 2026-07-26 and returned HTTP 400 to a
+    plain client (and empty content to the fetch tool), so the directory could not be queried
+    programmatically; https://www.reso.org/certification/ returned HTTP 200. No Century 21 Canada
+    entry was found via search either. Absence is therefore recorded as "not found / not claimed"
+    rather than "confirmed absent from the directory" — but Century 21 Canada makes no certification
+    claim anywhere on its own public surface, which is the defensible fact.
+  accessGate: none-published
+  accessGateDetail: >-
+    There is nothing for a developer to sign up for, apply to, license, or join at Century 21 Canada,
+    because no API is published at all. What a developer must do to obtain the underlying data is a
+    separate matter and belongs to other parties in the chain: Canadian MLS® listing content is
+    reachable only through CREA's REALTOR.ca DDF® Web API, which requires REALTOR®/board membership
+    and data-feed credentials created in CREA's member portal, or through a board/association IDX or
+    VOW data licence agreement. Century 21 Canada's own gated surfaces are people-gates, not API
+    gates: https://my.hub21.ca/ returned HTTP 302 to /sessions/new (agent/franchisee login,
+    MoxiWorks-hosted) and https://engage.hub21.ca/ returned HTTP 302 to /sessions/new. The consumer
+    site's MoxiWorks configuration carries a Virtual Office Website (VOW) feature flag
+    ("vow":{"name":"Virtual Office Website","enabled":0}) — the VOW registration wall exists in the
+    platform but is switched OFF for this brand, so no consumer registration gate is active either.
+  openData: false
+  openDataDetail: >-
+    No open data product exists. Canada has no HM Land Registry Price Paid or Ordnance Survey
+    equivalent at the national level, and land registration is provincial and largely privatised
+    (Teranet operates Ontario's registry under a long concession), so the public record itself is a
+    commercial product. Century 21 Canada publishes no dataset, no bulk download, and no unlicensed
+    feed. Its terms of use (https://www.c21.ca/terms-of-use , HTTP 200) name MoxiWorks LLC as site
+    operator and state that property information and photographs are "provided by the listing agent
+    and/or by the multiple listing service (MLS) ... and may not be copied or used in any manner
+    without the express permission of the copyright owner", that the user must "comply with the MLS
+    terms and to only access and use the MLS content for which You are authorized", and prohibit
+    downloading, copying, transmitting, or creating derivative works of the site. The in-search
+    disclaimer additionally carries CREA's REALTOR®/MLS® trademark and "screen scraping" /
+    "database scraping" prohibitions.
+  authModel: >-
+    No API authentication model is published, because there is no API. No OAuth, no API keys, no
+    documented scopes. https://century21.ca/.well-known/openid-configuration and
+    https://www.c21.ca/.well-known/openid-configuration both returned HTTP 403 (WAF/deny, not a
+    served discovery document). Human authentication for agents and franchisees is a MoxiWorks
+    session login at my.hub21.ca / engage.hub21.ca (HTTP 302 to /sessions/new). The public WordPress
+    REST API reports "authentication":[] — i.e. no authentication schemes are advertised for it.
+  valueChainPosition: >-
+    Brokerage franchisor. Master licensee of the CENTURY 21® brand for Canada (licence secured in
+    Vancouver in 1976, the CENTURY 21 System's first international franchise), roughly 400
+    independently owned and operated offices, HQ 1285 West Pender Street, Vancouver, BC V6E 4B1. It
+    consumes member-owned MLS® data distributed by CREA and resells brand, tools, and lead flow to
+    franchisees; it does not operate an MLS, a registry, or a data pipe.
+probes:
+  - url: https://century21.ca/
+    status: 200
+    note: 301/302 chain ends at https://www.c21.ca/ — c21.ca is the operative domain.
+  - url: https://www.century21.ca/
+    status: 200
+    note: Redirects to https://www.c21.ca/ .
+  - url: https://www.c21.ca/
+    status: 200
+    note: WordPress site, title "CENTURY 21 CANADA". Property search is a MoxiWorks Web Marketing System (WMS) embed; branding host svc.moxiworks.com.
+  - url: https://developer.century21.ca/
+    status: 200
+    note: NOT a developer portal. Wildcard DNS parks every *.century21.ca name on eboat.moxiworks.com. Confirmed by probing https://zzz-nonsense-test.century21.ca/ which also returned 200 at the same target.
+  - url: https://developers.century21.ca/
+    status: 200
+    note: Same wildcard artifact — resolves to eboat.moxiworks.com.
+  - url: https://api.century21.ca/
+    status: 200
+    note: Same wildcard artifact — resolves to eboat.moxiworks.com.
+  - url: https://docs.century21.ca/
+    status: 200
+    note: Same wildcard artifact — resolves to eboat.moxiworks.com.
+  - url: https://developer.c21.ca/
+    status: 200
+    note: Same wildcard artifact — resolves to eboat.moxiworks.com.
+  - url: https://api.c21.ca/
+    status: 200
+    note: >-
+      Real distinct host, but NOT an API. Microsoft-IIS/10.0 serving a 3-byte text/html body
+      containing the literal string "API", last-modified 2019-03-27. A parked placeholder.
+  - url: https://www.c21.ca/developers
+    status: 404
+  - url: https://www.c21.ca/api
+    status: 404
+  - url: https://www.c21.ca/docs
+    status: 404
+  - url: https://century21.ca/openapi.json
+    status: 200
+    note: Wildcard/redirect artifact resolving to eboat.moxiworks.com HTML — NOT an OpenAPI document. Nothing parseable was returned.
+  - url: https://century21.ca/swagger.json
+    status: 200
+    note: Wildcard/redirect artifact resolving to eboat.moxiworks.com HTML — NOT a Swagger document.
+  - url: https://century21.ca/.well-known/openid-configuration
+    status: 403
+  - url: https://www.c21.ca/.well-known/openid-configuration
+    status: 403
+  - url: https://www.c21.ca/.well-known/security.txt
+    status: 403
+  - url: https://www.c21.ca/robots.txt
+    status: 200
+    note: Standard WordPress robots; Disallow /wp-admin/, blocks MJ12bot and PetalBot; declares https://www.c21.ca/sitemap.xml . No API paths referenced.
+  - url: https://www.c21.ca/sitemap.xml
+    status: 200
+    note: google-sitemap-generator index of content pages only — no developer or API section.
+  - url: https://www.c21.ca/wp-json/
+    status: 200
+    note: >-
+      Incidental WordPress REST API route index (210 routes). Namespaces: oembed/1.0, services,
+      wordfence/v1, yoast/v1, yoast/v1/myyoast, wpml/v1, wpml/tm/v1, wpml/ate/v1,
+      otgs/installer/v1, bsf-core/v1, wp/v2, wp-site-health/v1, wp-block-editor/v1. Reports
+      "authentication":[]. This is a CMS surface, not a real estate product API, and is undocumented
+      by Century 21 Canada — deliberately NOT listed in apis[].
+  - url: https://www.c21.ca/wp-json/services
+    status: 200
+    note: >-
+      Custom WordPress namespace exposing "/services" and "/services/create_lead" (a lead-capture
+      write route, WPML-aware with en / fr-ca language codes). Route index read only; the write
+      endpoint was NOT called.
+  - url: https://www.c21.ca/wp-json/wp/v2/posts
+    status: 200
+    note: Standard WordPress posts collection, publicly readable.
+  - url: https://www.c21.ca/feed
+    status: 200
+    note: WordPress RSS feed — the only first-party syndication surface found.
+  - url: https://www.c21.ca/terms-of-use
+    status: 200
+    note: Site operator named as MoxiWorks LLC; MLS content licence and anti-scraping clauses.
+  - url: https://www.c21.ca/privacy-policy
+    status: 200
+  - url: https://www.c21.ca/search/
+    status: 200
+    note: >-
+      MoxiWorks WMS search embed (div#wms_search). Config references svc.moxiworks.com branding
+      service, Google Maps JS, Walk Score, Brytecore, eppraisal and Zillow API-key slots belonging to
+      the MoxiWorks platform — none of them a Century 21 Canada API. No first-party search API
+      endpoint is exposed or documented.
+  - url: https://www.c21.ca/listing/ON/Brampton/38-Callalily-Road-L7A-0M2/231060307
+    status: 200
+    note: >-
+      Live listing detail page. Data hosts observed are listings.moxiworks.com,
+      images-static.moxiworks.com and svc.moxiworks.com. No RESO, OData, $metadata, UPI or DDF
+      reference present.
+  - url: https://my.hub21.ca/
+    status: 302
+    note: Redirects to /sessions/new — MoxiWorks-hosted agent/franchisee member login. Not an API.
+  - url: https://engage.hub21.ca/
+    status: 302
+    note: Redirects to /sessions/new — MoxiWorks Engage member login.
+  - url: https://hub21.ca/
+    status: 0
+    note: Connection failed (no response) — apex does not serve.
+  - url: https://franchisesales.c21.ca/
+    status: 200
+    note: Redirects to https://century21franchise.ca/ — franchise recruitment site, no developer content.
+  - url: https://century21franchise.ca/
+    status: 200
+  - url: https://www.c21.ca/directory
+    status: 200
+    note: Human office/agent directory. No machine-readable equivalent published.
+  - url: https://www.c21.ca/commercial-listings
+    status: 200
+  - url: https://certification.reso.org/
+    status: 400
+    note: RESO certification directory would not serve to a plain client; could not be queried for a Century 21 Canada entry.
+  - url: https://www.reso.org/certification/
+    status: 200
+    note: RESO certification programme page. Current endorsements described as Data Dictionary 1.7 and Web API Core 2.0.0.
+  - url: https://developer.moxiworks.com/
+    status: 0
+    note: >-
+      Vendor context only. The platform operator's developer host did not resolve/connect;
+      https://moxiworks.com/developers/ returned 404 and https://www.moxiworks.com/ returned 200.
+      Any MoxiWorks developer surface would in any case belong to MoxiWorks, not to Century 21
+      Canada.
+findings:
+  summary: >-
+    Century 21 Canada is a brokerage franchisor with no published developer surface whatsoever. No
+    developer portal, no API documentation, no base URL, no OpenAPI, no OData $metadata, no GraphQL,
+    no webhooks or events, no SDKs, no CLI, no Postman collection, no status page for any API, and no
+    changelog. Every classic developer subdomain answers HTTP 200 only because *.century21.ca and
+    *.c21.ca are wildcarded onto eboat.moxiworks.com — a control probe against a nonsense subdomain
+    reproduced the same 200, so those responses are worthless as evidence of a portal. The single
+    distinct host, api.c21.ca, is a 2019-vintage IIS placeholder returning the three characters
+    "API". The consumer website itself is operated by MoxiWorks LLC per its own terms of use, and its
+    listing search, listing detail pages, agent hub and lead capture are all MoxiWorks platform
+    surfaces rather than Century 21 Canada APIs.
+  centralQuestion: >-
+    This organization is a clean negative case for the sector's central question. There is no
+    certification and no reachability — the two facts do not have to be separated here because
+    neither exists. RESO is absent because Canada does not run on RESO certification: it runs on
+    CREA's single national DDF® cooperative, and a franchisor is a licensee of that pool rather than
+    a certified data provider. The gate is therefore not "certified but closed" — it is
+    "none-published", with the real gate located one layer up at CREA (membership plus a signed data
+    licence).
+  webhooksEventsSdksPostman:
+    webhooks: false
+    events: false
+    sdks: false
+    cli: false
+    postman: false
+    graphql: false
+    note: None found. Absence across all six is itself the finding for a franchisor of this size.
+  productApiFamily: >-
+    None published. The product segmentation a developer would want — listings/search, agent and
+    office directory, commercial listings, neighbourhood/market reports, mortgage calculation, lead
+    capture — all exists as HTML pages on c21.ca (/search/, /directory, /commercial-listings,
+    /neighborhood-news, /mortgage-calculator) and as MoxiWorks-hosted functionality, but none of it
+    is exposed as a documented API.
+  incidentalMachineReadableSurfaces:
+    - url: https://www.c21.ca/wp-json/
+      kind: WordPress REST API route index
+      documented_by_provider: false
+      note: Real and anonymously callable, but a CMS artifact; excluded from apis[] on purpose.
+    - url: https://www.c21.ca/feed
+      kind: RSS
+      documented_by_provider: false
+    - url: https://www.c21.ca/sitemap.xml
+      kind: XML sitemap
+      documented_by_provider: false
+  platformVendor: >-
+    MoxiWorks LLC (Washington LLC) — named as site operator in the Century 21 Canada terms of use.
+    Supplies the Web Marketing System consumer site and search, the listings and imaging hosts, the
+    agent hub (hub21.ca / my.hub21.ca / engage.hub21.ca), CMA tooling, and the lead pipeline. Any API
+    capability in this stack is MoxiWorks' to publish, not Century 21 Canada's.
+sources:
+  - url: https://www.c21.ca/
+    type: Website
+    note: Primary consumer site; century21.ca redirects here.
+  - url: https://www.c21.ca/terms-of-use
+    type: TermsOfService
+    note: Names MoxiWorks LLC as operator; MLS content licence and anti-scraping terms.
+  - url: https://www.c21.ca/search/
+    type: PropertySearch
+    note: MoxiWorks WMS embed; VOW feature flag present but disabled.
+  - url: https://www.reso.org/certification/
+    type: Standard
+    note: RESO certification programme — no Century 21 Canada participation found.
+  - url: https://cfa.ca/lookforafranchise/listing/century-21-canada-limited-partnership/
+    type: CompanyProfile
+    note: Canadian Franchise Association listing — CENTURY 21 Canada Limited Partnership described as master franchisor holding complete rights to the CENTURY 21 brand in Canada.
+  - url: https://www.realtor.ca/office/firm/272374/century-21-canada-limited-partnership-500-1285-west-pender-street-vancouver-british-columbia-v6e-4b1
+    type: CompanyProfile
+    note: REALTOR.ca firm record — confirms legal name and Vancouver, BC head office address.
+actions:
+  apisYmlCreated: true
+  apisListed: 0
+  openapiDirCreated: false
+  reason: >-
+    apis[] is intentionally empty. Nothing real, documented, and provider-published was found to
+    list, and no OpenAPI, Swagger, or OData $metadata document was harvestable, so no openapi/
+    directory was created. Listing the incidental WordPress REST API as a product API would
+    misrepresent this provider.
