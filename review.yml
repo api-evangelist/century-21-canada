@@ -275,3 +275,139 @@ actions:
     list, and no OpenAPI, Swagger, or OData $metadata document was harvestable, so no openapi/
     directory was created. Listing the incidental WordPress REST API as a product API would
     misrepresent this provider.
+enrichmentRounds:
+- round: 2
+  date: '2026-07-26'
+  outcome: confirmed-no-api
+  summary: >-
+    Round 2 re-ran full contract discovery against every host and every registry, and the round-1
+    "no published API" verdict holds unchanged. No OpenAPI, Swagger, GraphQL SDL, AsyncAPI, MCP
+    manifest, .proto, SDK, CLI, or Postman collection exists for this provider. The only net-new
+    artifacts are a probed domain-security posture and a generated llms.txt whose purpose is to
+    state the absence explicitly so agents stop probing for a developer surface.
+  contractDiscovery: >-
+    The pipeline's harder-hunt sequence was applied in full. REST spec probes were run against the
+    API host root and the docs host, not just the docs shell; GraphQL introspection was attempted;
+    MCP tools/list had no server to target. All misses. A WAF ("Access Denied", HTTP 403) fronts
+    www.c21.ca and blocks /.well-known/* and /llms.txt to non-browser clients, so those 403s are a
+    WAF artifact rather than proof of absence — but no evidence of any such document exists in the
+    site HTML, sitemap, or robots.txt either. Because zero /.well-known documents returned 200, no
+    well-known/ artifact and no WellKnown pointer were emitted.
+  wildcardDnsControl: >-
+    A control probe of https://zzznotreal.c21.ca returned HTTP 200 with the generic title "Agent
+    Websites", confirming round 1's finding that *.c21.ca wildcard DNS makes every subdomain 200.
+    Any future subdomain 200 for this provider must be treated as parking unless it returns a
+    distinct branded title. join.c21.ca ("Century 21 Careers") and quebec.c21.ca ("Century 21
+    Québec") passed that test and were added to apis.yml; developer./api./docs. did not.
+  probes:
+  - url: https://www.c21.ca/llms.txt
+    status: '403'
+    note: WAF "You are not allowed to access this resource" — blocked, not confirmed absent.
+  - url: https://www.c21.ca/.well-known/api-catalog
+    status: '403'
+    note: WAF blocked. No api-catalog evidence anywhere in the public surface.
+  - url: https://www.c21.ca/.well-known/ai-plugin.json
+    status: '403'
+    note: WAF blocked.
+  - url: https://www.c21.ca/.well-known/oauth-authorization-server
+    status: '403'
+    note: WAF blocked. No OAuth surface exists — there is no API to authorize against.
+  - url: https://www.c21.ca/graphql
+    status: '403'
+    note: WAF blocked; no GraphQL endpoint referenced anywhere in site HTML or JS.
+  - url: https://www.c21.ca/api-docs
+    status: '404'
+    note: Genuine 404 from the WordPress app (path-level 404s are real; only subdomains wildcard).
+  - url: https://www.c21.ca/openapi.json
+    status: '403'
+    note: WAF blocked at the www host; century21.ca variant was a wildcard HTML artifact in round 1.
+  - url: https://registry.npmjs.org/-/v1/search?text=century21
+    status: '200'
+    note: Zero packages. No first-party JavaScript SDK.
+  - url: https://pypi.org/pypi/century21/json
+    status: '404'
+    note: No PyPI package. No first-party Python SDK.
+  - url: https://api.github.com/orgs/century21canada
+    status: '404'
+    note: No GitHub organization. c21canada also 404. No public source or .proto to harvest.
+  - url: https://www.postman.com/_api/ws/proxy
+    status: '200'
+    note: >-
+      Public Postman search for "century 21 canada" returned no first-party workspace. The nearest
+      hits ("century21-test", "bigfire-21-century") are unrelated third-party teams with zero APIs
+      and zero workspaces. No Postman pointer emitted.
+  - url: https://zzznotreal.c21.ca
+    status: '200'
+    note: Wildcard-DNS control probe. Generic "Agent Websites" page — confirms subdomain 200s are parking.
+  - url: https://join.c21.ca/
+    status: '200'
+    note: Real distinct site, title "Home - Century 21 Careers". Added to apis.yml as Careers.
+  - url: https://quebec.c21.ca/proprietes
+    status: '200'
+    note: Real distinct French-language regional site. Added to apis.yml as RegionalSite.
+  - url: https://www.c21.ca/contact
+    status: '200'
+    note: Consumer contact form. Added as ContactUs, not Support — it is not a developer channel.
+  - url: https://www.c21.ca/careers
+    status: '200'
+    note: Careers landing page on the main site; join.c21.ca is the fuller surface.
+  - url: https://www.moxiworks.com/.well-known/security.txt
+    status: '404'
+    note: Vendor context. The platform operator publishes no security.txt either.
+  - url: https://my.hub21.ca/.well-known/security.txt
+    status: '404'
+    note: Member-portal host publishes no security.txt.
+  wordpressRestApiReexamined: >-
+    The incidental WordPress route index at https://www.c21.ca/wp-json/ was re-parsed in round 2:
+    210 routes across 13 namespaces, all of which are WordPress core (wp/v2, wp-site-health,
+    wp-block-editor, oembed) or third-party plugin management surfaces (Wordfence, WPML, Yoast,
+    OTGS installer, bsf-core). The single Century 21-specific namespace is "/services", whose only
+    operation is POST /services/create_lead — a site lead-capture endpoint, not a data API. It was
+    NOT invoked. This reconfirms round 1's decision to keep the WordPress REST API out of apis[]:
+    it is a CMS artifact, undocumented by the provider, and listing it would misrepresent a
+    franchisor that publishes no developer surface.
+  artifactsNotEmitted:
+    reason: >-
+      Most pipeline artifacts are derivable only from a machine-readable contract, and this provider
+      has none. The following were evaluated and deliberately skipped rather than fabricated.
+    skipped:
+    - {artifact: openapi/, reason: No OpenAPI or Swagger document exists on any host.}
+    - {artifact: packages/, reason: No first-party SDK on npm, PyPI, or any registry; no SDKs pointer earned.}
+    - {artifact: well-known/, reason: Zero /.well-known documents returned 200; a WellKnown pointer would be unearned.}
+    - {artifact: mcp/, reason: No hosted MCP server, and no OpenAPI from which to derive candidate tools.}
+    - {artifact: mcp/ tool-crosswalk, reason: Requires an MCP or GraphQL surface plus an OpenAPI; none exist.}
+    - {artifact: overlays/, reason: An Overlay extends an OpenAPI document; there is none to extend.}
+    - {artifact: grpc/, reason: No GitHub org, no buf.build presence, no published .proto.}
+    - {artifact: conformance/, reason: No spec to derive from and no published compliance claims; would be empty assertions.}
+    - {artifact: errors/, reason: Error catalogs derive from OpenAPI 4xx/5xx responses; no spec exists.}
+    - {artifact: lifecycle/, reason: No API means no versioning or deprecation policy; no status page found, and subdomain probes are unreliable here due to wildcard DNS.}
+    - {artifact: scopes/, reason: No OAuth surface anywhere.}
+    - {artifact: authentication/, reason: No securitySchemes to derive from; there is no API to authenticate to.}
+    - {artifact: sandbox/, reason: No test environment, keys, or fixtures published.}
+    - {artifact: conventions/, reason: No documented request/response semantics and no spec; no idempotency contract, so no Idempotency pointer.}
+    - {artifact: changelog/, reason: No dated API changelog; the blog is marketing content.}
+    - {artifact: cli/, reason: No first-party CLI.}
+    - {artifact: components/, reason: No embeddable component library published by Century 21 Canada; the site embeds MoxiWorks widgets.}
+    - {artifact: data-model/, reason: Entity graph derives from OpenAPI $ref links; no spec exists.}
+    - {artifact: asyncapi/, reason: No event, streaming, or webhook surface. Not penalized — this provider has no event surface to document.}
+    - {artifact: skills/, reason: Agent Skills must be grounded in real operationIds; there is no spec to ground them in.}
+    - {artifact: agentic-access/, reason: Generated by classifying OpenAPI operations; none exist.}
+    - {artifact: arazzo/, reason: Workflows stitch real operations; none exist.}
+    - {artifact: security/ vulnerability-disclosure, reason: Probe found no security.txt Policy/Contact, no bug bounty, and no disclosure page. No Security pointer earned.}
+    - {artifact: security/ trust-center, reason: Probe found no trust center and no named certifications. No Compliance or TrustCenter pointer earned.}
+  artifactsEmitted:
+  - artifact: security/century-21-canada-domain-security.yml
+    type: DomainSecurity
+    method: probed
+    note: >-
+      www.c21.ca serves TLSv1.3 with HSTS max-age 31536000. Registrable domain c21.ca has SPF and
+      DMARC (policy p=none — monitoring only, not enforcing), no DNSSEC, and no CAA records.
+      Absence of DNSSEC and CAA is recorded as valid probed data.
+  - artifact: llms/century-21-canada-llms.txt
+    type: LLMsTxt
+    method: generated
+    note: >-
+      Generated from apis.yml and this review because /llms.txt is WAF-blocked and the provider
+      publishes none. Its central content is the explicit statement that no API exists, plus the
+      redirect to CREA/DDF as the real Canadian listing seam and the note that the site terms
+      prohibit automated harvesting.

@@ -1,0 +1,67 @@
+# Century 21 Canada
+
+> CENTURY 21 Canada Limited Partnership is the Canadian master franchisor of the CENTURY 21(R) real
+> estate brand, headquartered in Vancouver, British Columbia, with roughly 400 independently owned
+> and operated offices nationwide. It sits in the brokerage/franchisor layer of the Canadian real
+> estate value chain: it consumes listing data rather than originating it. Century 21 Canada
+> publishes NO public API — no developer portal, no documentation, no base URL, no SDK, no
+> webhooks, no Postman collection, and no machine-readable contract of any kind.
+
+## Important for agents and integrators
+
+- There is no Century 21 Canada API to call, no key to request, and nothing to sign up for.
+  This file exists to state that clearly so agents stop probing for a developer surface.
+- Canadian MLS(R) listing content is consolidated nationally by the Canadian Real Estate
+  Association (CREA) and distributed through REALTOR.ca and the Data Distribution Facility
+  (DDF(R)). A developer wanting Canadian listing data goes to CREA or to a board/association
+  IDX/VOW data licence — not to Century 21 Canada.
+- RESO is absent from this provider: no RESO Web API certification, no Data Dictionary
+  certification, no OData service root or $metadata document, and no Universal Property
+  Identifier usage. That is the expected Canadian answer — RESO certification is a US MLS-layer
+  artifact, and CREA's DDF(R) is the operative Canadian seam.
+- The public consumer site and its property search are operated on the MoxiWorks platform
+  (svc.moxiworks.com, listings.moxiworks.com). Those are MoxiWorks surfaces, not Century 21
+  Canada first-party APIs.
+- The site terms of use prohibit copying, downloading, transmitting, or creating derivative
+  works from site content, and require compliance with the MLS terms for any MLS content.
+  Automated harvesting of listing content from this site is not permitted.
+- Wildcard DNS on *.c21.ca and *.century21.ca returns HTTP 200 for every subdomain, including
+  developer., api., and docs. Those 200s are a DNS parking artifact serving a generic
+  "Agent Websites" page — they are NOT a developer portal.
+- Agent- and franchisee-facing tools are behind the hub21.ca member login (a people gate,
+  not an API gate).
+
+## APIs
+
+None published. `apis[]` in the APIs.json descriptor is intentionally empty.
+
+## Specs
+
+None. No OpenAPI, Swagger, AsyncAPI, GraphQL SDL, Protobuf, or MCP manifest exists for this
+provider.
+
+## Artifacts in this profile
+
+- [APIs.json descriptor](https://raw.githubusercontent.com/api-evangelist/century-21-canada/refs/heads/main/apis.yml): the machine-readable profile.
+- [Review](https://raw.githubusercontent.com/api-evangelist/century-21-canada/refs/heads/main/review.yml): the full probe record and sector analysis behind the "no API" finding.
+- [Domain security](https://raw.githubusercontent.com/api-evangelist/century-21-canada/refs/heads/main/security/century-21-canada-domain-security.yml): probed TLS/HSTS/DNSSEC/CAA/SPF/DMARC posture.
+
+## Company surfaces
+
+- [Website](https://www.c21.ca/): consumer brand site.
+- [Property search](https://www.c21.ca/search/): MoxiWorks-hosted listing search (not an API).
+- [Commercial listings](https://www.c21.ca/commercial-listings)
+- [Office and agent directory](https://www.c21.ca/directory): human directory, no machine-readable equivalent.
+- [Quebec regional site](https://quebec.c21.ca/): French-language regional surface.
+- [Blog](https://www.c21.ca/blog) and [RSS feed](https://www.c21.ca/feed): the only first-party syndication surface found.
+- [Careers](https://join.c21.ca/)
+- [Franchise sales](https://century21franchise.ca/)
+- [Member portal](https://my.hub21.ca/): agent/franchisee login.
+- [Contact](https://www.c21.ca/contact)
+- [Terms of use](https://www.c21.ca/terms-of-use) and [privacy policy](https://www.c21.ca/privacy-policy)
+
+## Related providers to check instead
+
+- Canadian Real Estate Association (CREA) — REALTOR.ca and the DDF(R), the actual Canadian
+  listing distribution seam.
+- MoxiWorks — the platform vendor operating this brand's consumer site and search.

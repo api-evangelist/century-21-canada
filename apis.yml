@@ -44,6 +44,10 @@ modified: '2026-07-26'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/century-21-canada-domain-security.yml
+- type: LLMsTxt
+  url: llms/century-21-canada-llms.txt
 - type: Website
   url: https://www.c21.ca/
 - type: Blog
@@ -62,8 +66,17 @@ common:
   url: https://www.c21.ca/search/
 - type: OfficeDirectory
   url: https://www.c21.ca/directory
+- type: CommercialListings
+  url: https://www.c21.ca/commercial-listings
+- type: RegionalSite
+  name: CENTURY 21 Québec
+  url: https://quebec.c21.ca/
 - type: FranchiseSales
   url: https://century21franchise.ca/
+- type: Careers
+  url: https://join.c21.ca/
+- type: ContactUs
+  url: https://www.c21.ca/contact
 - type: MemberPortal
   url: https://my.hub21.ca/
 - type: Facebook
