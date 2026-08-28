@@ -28,6 +28,17 @@ description: >-
   Canada, and is deliberately not listed here as a product API. Agent- and franchisee-facing tools
   live behind the hub21.ca member login. This profile is therefore identity-only and honestly
   records a brokerage franchisor with no published developer surface.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/century-21-canada.png
 tags:
 - Real-Estate
