@@ -1,0 +1,25 @@
+# Front Door AI Index — century-21-canada — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: century-21-canada
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.c21.ca
+  final_host: www.c21.ca
+  ownership: own
+  owner: century-21-canada
+  shares_host_with: null
+  inherited_from: null
+  verdict: silent
+  score: 0
+  host_score: 0
+  density: 0.0
+  words: 1607
+  tiers:
+    agentic: 0
+    core: 0
+    model: 0
+  ambiguous: 8
+  top_terms:
+    agent: 8
