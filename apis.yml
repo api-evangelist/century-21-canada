@@ -53,7 +53,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/century-21-canada.png
 tags:
-- Real-Estate
+- Real Estate
 - Canada
 - Brokerage
 - Franchising
@@ -72,6 +72,7 @@ tags_raw:
 - Residential Real Estate
 - Commercial Real Estate
 - PropTech
+- Real-Estate
 created: '2026-07-26'
 modified: '2026-07-26'
 specificationVersion: '0.23'
