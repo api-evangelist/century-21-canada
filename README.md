@@ -1,4 +1,4 @@
-# Century 21 Canada (century-21-canada)
+# Century 21 Canada
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,74 +64,82 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-CENTURY 21 Canada Limited Partnership is the Canadian master franchisor of the CENTURY 21® real estate brand, headquartered at 1285 West Pender Street in Vancouver, British Columbia. The master licence for Canada was secured in Vancouver in 1976 — the first international franchise of the CENTURY 21 System — and the network today spans roughly 400 independently owned and operated offices from coast to coast. Century 21 Canada sits in the brokerage/franchisor layer of the Canadian real estate value chain: it consumes member-owned MLS® listing data distributed nationally by the Canadian Real Estate Association (CREA) through REALTOR.ca and the Data Distribution Facility (DDF®), rather than originating or redistributing that data as a product of its own.
+CENTURY 21 Canada Limited Partnership is the Canadian master franchisor of the CENTURY 21® real estate brand, headquartered at 1285 West Pender Street in Vancouver, British Columbia. The master licence for Canada was secured in Vancouver in 1976 — the first international franchise of the CENTURY 21 System — and the network today spans roughly 400 independently owned and operated offices from coast to coast. Century 21 Canada sits in the brokerage/franchisor layer of the Canadian real estate value chain: it does not originate listing data, it consumes it. Canadian residential listings are consolidated nationally by the Canadian Real Estate Association (CREA), which runs REALTOR.ca and the Data Distribution Facility (DDF®); franchisors and brokerages redistribute that member-owned MLS® content under CREA rules rather than publishing it themselves. Century 21 Canada's API posture is accordingly empty. As of a 2026-07-26 probe there is no developer portal, no API documentation, no published base URL, no SDK, no webhooks, no Postman collection and no machine-readable contract of any kind on century21.ca or c21.ca — both century21.ca and c21.ca resolve to the same WordPress consumer site whose terms of use name MoxiWorks LLC as the site operator, and whose property search is a hosted MoxiWorks Web Marketing System surface rather than a first-party API. Wildcard DNS on *.century21.ca and *.c21.ca returns HTTP 200 for every subdomain probed (developer., developers., api., docs.) by parking them all on eboat.moxiworks.com, so those 200s are a DNS artifact and not a developer portal. RESO is absent: no RESO Web API or Data Dictionary certification, no OData or $metadata endpoint, and no Universal Property Identifier reference appears anywhere in the public surface — consistent with Canada, where RESO certification is not the operative seam and CREA's DDF® is. The only genuinely public, anonymously callable machine-readable surface found is the incidental WordPress REST API route index at https://www.c21.ca/wp-json/, which is a CMS artifact, is undocumented by Century 21 Canada, and is deliberately not listed here as a product API. Agent- and franchisee-facing tools live behind the hub21.ca member login. This profile is therefore identity-only and honestly records a brokerage franchisor with no published developer surface.
 
-Its API posture is empty, and this profile records that honestly. As of a 2026-07-26 probe there is no developer portal, no API documentation, no published base URL, no SDK, no webhooks, no Postman collection, and no machine-readable contract of any kind on century21.ca or c21.ca.
+**Areas:** Real Estate · Canada · Brokerage · Franchising · Property Listings · MLS · Residential Real Estate · Commercial Real Estate · PropTech
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/century-21-canada/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/century-21-canada/refs/heads/main/apis.yml)
+## Century 21 Canada on APIs.io
 
-## Tags
+Everything profiled for Century 21 Canada is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/century-21-canada/](https://apis.io/providers/century-21-canada/)** — or go straight to one of the APIs or properties below.
 
-- Real Estate
-- Canada
-- Brokerage
-- Franchising
-- Property Listings
-- MLS
-- Residential Real Estate
-- Commercial Real Estate
-- PropTech
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-26
-- **Modified:** 2026-07-26
+#### Security (1)
 
-## APIs
+Authentication, trust centre, and vulnerability disclosure.
 
-No public APIs are published by Century 21 Canada. See `review.yml` for the full probe record.
+- [Century 21 Canada Domain Security](https://apis.io/security/century-21-canada/century-21-canada-domain-security/)
 
-## RESO Posture
+## Where to find this API
 
-No RESO reference found. There is no RESO Web API certification, no RESO Data Dictionary certification or version claim, no OData service root, no `$metadata` document, and no Universal Property Identifier (UPI) usage anywhere in the public surface. This is the expected Canadian answer: RESO certification is a US MLS-layer artifact, while Canadian listing distribution runs through CREA's single national DDF®, which CREA describes as normalized to the RESO Data Dictionary. A brokerage franchisor is a downstream consumer of that pool, not a certified data provider.
-
-## Access Gate
-
-`none-published` — there is nothing for a developer to sign up for, apply to, license, or join, because no API exists. The real gate sits one layer up at CREA: REALTOR®/board membership plus data-feed credentials, or a board IDX/VOW data licence agreement. Century 21 Canada's own gated surfaces are people-gates, not API gates — `my.hub21.ca` and `engage.hub21.ca` both redirect (HTTP 302) to a MoxiWorks member login.
-
-## Open Data
-
-None. No dataset, bulk download, or unlicensed feed is published. The terms of use restrict MLS content to authorized use and prohibit scraping and derivative works.
-
-## Auth Model
-
-No API authentication model is published. `/.well-known/openid-configuration` returned HTTP 403 on both century21.ca and www.c21.ca. Human authentication for agents and franchisees is a MoxiWorks session login.
-
-## Platform Vendor
-
-The Century 21 Canada terms of use name **MoxiWorks LLC** as the site operator. The consumer site, property search, listing hosts, agent hub (hub21.ca), CMA tooling, and lead pipeline are all MoxiWorks platform surfaces. Any API capability in that stack belongs to MoxiWorks, not to Century 21 Canada.
-
-## A Note on Wildcard DNS
-
-`*.century21.ca` and `*.c21.ca` are wildcarded onto `eboat.moxiworks.com`, so `developer.`, `developers.`, `api.` and `docs.` all return HTTP 200 without a developer portal existing. A control probe against a nonsense subdomain reproduced the same 200. The one distinct host, `api.c21.ca`, is a 2019-vintage Microsoft-IIS placeholder returning the three characters `API`.
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.c21.ca/)
 - [Blog](https://www.c21.ca/blog)
-- [Blog RSS](https://www.c21.ca/feed)
-- [Press Releases](https://www.c21.ca/category/press-releases)
-- [Terms of Service](https://www.c21.ca/terms-of-use)
-- [Privacy Policy](https://www.c21.ca/privacy-policy)
-- [Sitemap](https://www.c21.ca/sitemap.xml)
-- [Property Search](https://www.c21.ca/search/)
-- [Office Directory](https://www.c21.ca/directory)
-- [Franchise Sales](https://century21franchise.ca/)
-- [Member Portal](https://my.hub21.ca/)
-- [Facebook](https://www.facebook.com/CENTURY21Canada)
-- [Instagram](https://www.instagram.com/century21canada/)
-- [YouTube](https://www.youtube.com/channel/UCK9uFomKQuOUR8sSKHe7yWQ)
+- [Terms of service](https://www.c21.ca/terms-of-use)
+- [Privacy policy](https://www.c21.ca/privacy-policy)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 9.2** — minimal · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 56.3 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 2.4 |
+| Access clarity | 21.1 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 13.0** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/century-21-canada/](https://apis.io/providers/century-21-canada/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Century 21 Canada: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/century-21-canada/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
